@@ -69,7 +69,8 @@
                 border-radius: 7px;
                 width: 100%;
                 padding: 1em;
-                word-break: break-all;
+                // word-break: break-all;
+                word-wrap: break-word;
                 box-sizing: border-box;
             }
         }
