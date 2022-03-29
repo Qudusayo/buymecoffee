@@ -29,7 +29,7 @@ function Navbar({ isTransparent }) {
                 isTransparent ? styles.transparent : null,
             ].join(" ")}
         >
-            <h3>BuyMeCoffee</h3>
+            <h3>PayForMyCoffee</h3>
             <button onClick={authUser}>
                 {isAuthenticated
                     ? sliceAddress(user.get("ethAddress"))

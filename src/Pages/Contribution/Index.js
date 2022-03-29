@@ -4,7 +4,6 @@ import {
     useMoralis,
     useMoralisQuery,
     useWeb3ExecuteFunction,
-    useWeb3Transfer
 } from "react-moralis";
 import Navbar from "../../Component/Navbar/Index";
 import styles from "./style.module.scss";
@@ -23,7 +22,7 @@ function Contribution({ username }) {
     const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
     const { fetch } = useWeb3ExecuteFunction();
     const { data } = useMoralisQuery(
-        "Donation",
+        "Donor",
         (query) => query,
         [userAddress],
         {
@@ -31,13 +30,6 @@ function Contribution({ username }) {
             live: true,
         }
     );
-
-    const web3Transfer = useWeb3Transfer({
-        amount: Moralis.Units.Token(0.1, 18),
-        receiver: "0x7F01F9Af70708642bcDD9d240f018CF8B6fdAa6c",
-        type: "erc20",
-        contractAddress: "0x01BE23585060835E02B77ef475b0Cc51aA1e0709",
-    });
 
     useEffect(() => {
         console.log(userAddress);
@@ -103,31 +95,25 @@ function Contribution({ username }) {
     };
 
     const donate = () => {
-        // let params = {
-        //     _username: username,
-        //     _note: note,
-        // };
+        let params = {
+            _username: username,
+            _note: note,
+        };
 
-        // let amount = 0.001;
+        let amount = 0.001;
 
-        // let options = {
-        //     contractAddress,
-        //     functionName: "donate",
-        //     abi,
-        //     params,
-        //     msgValue: Moralis.Units.ETH(amount),
-        // };
+        let options = {
+            contractAddress,
+            functionName: "donate",
+            abi,
+            params,
+            msgValue: Moralis.Units.ETH(amount),
+        };
 
-        // fetch({
-        //     params: options,
-        //     onSuccess: (tx) => tx.wait().then((newTx) => console.log(newTx)),
-        //     onError: (error) => console.log(error),
-        // });
-
-        // console.log(options);
-
-        web3Transfer.fetch({
-            onSuccess: (tx) => tx.wait().then(newTx => console.log(newTx)),
+        fetch({
+            params: options,
+            onSuccess: (tx) => tx.wait().then((newTx) => console.log(newTx)),
+            onError: (error) => console.log(error),
         });
     };
 

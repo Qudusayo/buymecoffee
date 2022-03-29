@@ -49,7 +49,7 @@ function Home() {
                     </p>
                     <form className={styles.Form} onSubmit={submitFormHandler}>
                         <div>
-                            <span>payformycoffe.com/</span>
+                            <span>payformycoffe.crypto/</span>
                             <input
                                 placeholder="yourname"
                                 onChange={setUsernameHandler}
