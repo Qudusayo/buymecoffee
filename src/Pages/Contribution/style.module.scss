@@ -1,3 +1,15 @@
+@mixin shareButton {
+    display: block;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    background-color: #dedede;
+    padding: 0.3em 1em;
+    cursor: pointer;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+}
+
 .Contribution {
     .Header {
         width: 100%;
@@ -72,6 +84,61 @@
                 // word-break: break-all;
                 word-wrap: break-word;
                 box-sizing: border-box;
+            }
+
+            &rmation {
+                border: 1px solid #dedede;
+                border-radius: 7px;
+                width: 100%;
+                padding: 1em;
+                margin: 1em 0;
+                word-wrap: break-word;
+                box-sizing: border-box;
+
+                &Header {
+                    display: flex;
+                    align-items: flex-start;
+
+                    .supportInformationIcon {
+                        border-radius: 50%;
+                    }
+
+                    p {
+                        margin: 0.5em 0 0 0.5em;
+
+                        button {
+                            @include shareButton();
+                        }
+                    }
+                }
+
+                &Message {
+                    border: 1px solid lighten($color: #6610f2, $amount: 20);
+                    background-color: lighten($color: #6610f2, $amount: 45);
+                    padding: 1em;
+                    border-radius: 7px;
+                    margin-top: 1em;
+                    position: relative;
+                    z-index: 1;
+
+                    div {
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        background-color: lighten($color: #6610f2, $amount: 45);
+                        border: 1px solid lighten($color: #6610f2, $amount: 20);
+                        border-radius: 2px;
+                        transform: rotate(45deg);
+                        top: -7px;
+                        z-index: -100;
+                        border-right: none;
+                        border-bottom: none;
+                    }
+
+                    button {
+                        @include shareButton();
+                    }
+                }
             }
         }
 

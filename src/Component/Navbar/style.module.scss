@@ -1,0 +1,51 @@
+.Navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em 2em;
+    width: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    z-index: 100;
+
+    h3 {
+        margin: 0;
+        color: #ffffff;
+    }
+
+    button {
+        display: block;
+        font-size: 0.9em;
+        text-align: center;
+        outline: none;
+        border: none;
+        border-radius: 25px;
+        height: 45px;
+        padding: 0 2em;
+        color: #6610f2;
+        background-color: #ffffff;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($color: #FFFFFF, $amount: 3);
+        }
+
+        &:disabled {
+            background-color: lighten($color: #6610f2, $amount: 35);
+            color: #FFFFFF;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.transparent{
+    border-bottom: 1px solid #dedede;
+
+    h3{
+        color: #000000;
+    }
+
+    button{
+        background-color: #dedede;
+    }
+}

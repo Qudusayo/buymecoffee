@@ -1,0 +1,12 @@
+.ChainBanner{
+    background-color: lighten($color: #6610f2, $amount: 20);
+    color: #ffffff;
+    text-align: center;
+    padding: .5em 0;
+    font-size: .9em;
+    transition: all .2s ease;
+
+    span{
+        cursor: pointer;
+    }
+}
