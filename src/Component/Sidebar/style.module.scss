@@ -1,0 +1,79 @@
+.Sidebar {
+    .Header {
+        text-align: center;
+
+        img {
+            width: 75px;
+            height: 75px;
+            border-radius: 100%;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: .95em;
+        }
+
+        .Buttons {
+            margin: 1em auto;
+
+            button {
+                font-size: 0.8em;
+                text-align: center;
+                outline: none;
+                border: none;
+                border-radius: 25px;
+                height: 30px;
+                width: 8em;
+                padding: 0 2em;
+                background-color: #dedede;
+                cursor: pointer;
+
+                &:nth-of-type(1){
+                    background-color: lighten($color: #6610f2, $amount: 30);
+                }
+
+                &:nth-of-type(2){
+                    margin-left: .5em;
+                }
+            }
+        }
+    }
+
+    ul{
+        list-style-type: none;
+        padding-inline-start: 0;
+        margin: 0;
+
+        a{
+            text-decoration: none;
+            color: #808080;
+            font-size: .9em;
+            font-weight: bold;
+
+            li{
+                padding: .8em 1.5em;
+            }
+
+            &.isActive{
+                background-color: #ededed;
+                color: #000000;
+                border-radius: 7px;
+                display: block;
+            }
+
+            &:hover{
+                color: black;
+            }
+        }
+
+        &:nth-of-type(2){
+            margin-top: .4em;
+        }
+    }
+
+    p{
+        font-size: .7em;
+        text-align: center;
+        margin-bottom: 0;
+    }
+}

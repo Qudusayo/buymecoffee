@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 
 export default function ChainBanner({ chain }) {
     const { switchNetwork } = useChain();
-    const supportedChain = "0x13881";
+    const supportedChain = process.env.REACT_APP_SUPPORTED_CHAIN_ID;
 
     return chain !== supportedChain ? (
         <div className={styles.ChainBanner}>

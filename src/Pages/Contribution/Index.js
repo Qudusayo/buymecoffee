@@ -3,66 +3,49 @@ import Blockies from "react-blockies";
 import {
     useMoralis,
     useMoralisQuery,
+    useMoralisSubscription,
     useWeb3ExecuteFunction,
 } from "react-moralis";
 import Navbar from "../../Component/Navbar/Index";
 import styles from "./style.module.scss";
 import abi from "./../../assets/abi.json";
 
-function Contribution({ username }) {
+function Contribution({ username, userAddress }) {
     const [fullName, setFullName] = useState("Qudusayo");
     const [creating, setCreating] = useState("Programming some stuffs");
-    const [userAddress, setUserAddress] = useState("");
     const [note, setNote] = useState("");
     const [supporters, setSupporters] = useState(0);
     const [support, setSupport] = useState([]);
+    const [totalSupport, setTotalSupport] = useState([]);
+    const [sliceGap, setSliceGap] = useState(5);
     const [amount, setAmount] = useState(1);
     const [inputValue, setInputValue] = useState("");
-    const contractAddress = "0x779c96D9f8cEEFABD594Ee511704bB6e26E08549";
+    const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
     const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
     const { fetch } = useWeb3ExecuteFunction();
-    const { data } = useMoralisQuery(
-        "Donor",
-        (query) => query,
-        [userAddress],
-        {
-            autoFetch: true,
-            live: true,
-        }
-    );
+    const Query = useMoralisQuery("Donation", (query) => query, [userAddress], {
+        autoFetch: true,
+        live: true,
+    });
+    useMoralisSubscription("Donation", (q) => q, [], {
+        onCreate: (data) => console.log(data, "CREATED"),
+        onUpdate: (data) => {
+            console.log(data);
+            return Query.fetch();
+        },
+        onEnter: (data) => console.log(data, "ENTERED"),
+        enabled: true,
+    });
 
     useEffect(() => {
-        console.log(userAddress);
-
-        if (isWeb3Enabled) {
-            let params = {
-                _username: username,
-            };
-
-            let options = {
-                contractAddress,
-                functionName: "getAddressWithUsername",
-                abi,
-                params,
-            };
-
-            fetch({
-                params: options,
-                onSuccess: (tx) => {
-                    setUserAddress(tx);
-                },
-                onError: (error) => console.log(error),
-            });
-
-            console.log(userAddress);
-        }
-
         const _supporters = {};
-        const result = data
-            .filter(
-                (each) =>
-                    parseInt(each.get("reciever")) == parseInt(userAddress)
-            )
+        const result = Query.data
+            ?.filter((each) => {
+                return (
+                    each.get("reciever").toLowerCase() ===
+                    userAddress.toLowerCase()
+                );
+            })
             .map((data) => {
                 _supporters[data.get("sender")] = 0;
                 return {
@@ -73,11 +56,12 @@ function Contribution({ username }) {
                 };
             })
             .sort((a, b) => b.block_number - a.block_number);
-        console.log(result);
-        setSupport(result);
+        // console.log(result);
+        setSupport(result.slice(0, sliceGap));
+        setTotalSupport(result);
         setSupporters(Object.keys(_supporters).length);
-        console.log(data);
-    }, [isWeb3Enabled, data]);
+        // console.log(Query.data);
+    }, [isWeb3Enabled, Query.data]);
 
     const onChangeHandler = (e) => {
         let manualAmount = e.target.value;
@@ -112,7 +96,12 @@ function Contribution({ username }) {
 
         fetch({
             params: options,
-            onSuccess: (tx) => tx.wait().then((newTx) => console.log(newTx)),
+            onSuccess: (tx) =>
+                tx.wait().then((newTx) => {
+                    setNote("");
+                    setAmount(1);
+                    console.log(newTx);
+                }),
             onError: (error) => console.log(error),
         });
     };
@@ -123,6 +112,13 @@ function Contribution({ username }) {
             "..." +
             address.slice(address.length - 4, address.length)
         );
+    };
+
+    const seeMore = () => {
+        console.log(support);
+        let newGap = sliceGap + 5;
+        setSupport(totalSupport.slice(0, newGap));
+        setSliceGap(newGap);
     };
 
     return (
@@ -183,6 +179,14 @@ function Contribution({ username }) {
                                 </div>
                             </div>
                         ))}
+                        {!(support.length === totalSupport.length) && (
+                            <button
+                                className={styles.showMore}
+                                onClick={() => seeMore()}
+                            >
+                                See more
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div className={styles.support}>

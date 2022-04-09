@@ -7,7 +7,6 @@ function Navbar({ isTransparent }) {
 
     const authUser = () => {
         if (!isAuthenticated) {
-            console.log(null)
             authenticate();
         } else {
             logout();
