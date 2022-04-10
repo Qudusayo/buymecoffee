@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
     useApiContract,
     useMoralis,
-    useWeb3ExecuteFunction,
 } from "react-moralis";
 import { useParams } from "react-router-dom";
 
@@ -12,8 +11,7 @@ import abi from "./../../assets/abi.json";
 
 export default function Display() {
     const parameters = useParams();
-    const { fetch } = useWeb3ExecuteFunction();
-    const { isWeb3Enabled, isAuthenticated } = useMoralis();
+    const { isWeb3Enabled, isAuthenticated, isInitialized } = useMoralis();
     const [validUsername, setValidUsername] = useState(false);
     const [address, setAddress] = useState("");
 
@@ -29,7 +27,7 @@ export default function Display() {
     });
 
     useEffect(() => {
-        console.log(isAuthenticated);
+        console.log(isAuthenticated, isInitialized);
 
         runContractFunction({
             onSuccess: (tx) => {
@@ -41,7 +39,7 @@ export default function Display() {
                 console.log(error);
             },
         });
-    }, []);
+    }, [isAuthenticated, isInitialized]);
 
     return validUsername ? (
         <Contribution username={parameters.username} userAddress={address} />
