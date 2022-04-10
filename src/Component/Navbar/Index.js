@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 function Navbar({ setIsModalOpen }) {
     const { isAuthenticated, user } = useMoralis();
     const { pathname } = useLocation();
-    const transparentPaths = ["/"];
+    const transparentPaths = ["/", "/error"];
 
     function disableScroll() {
         window.onscroll = function () {
