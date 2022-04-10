@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Blockies from "react-blockies";
+import { RiHeart2Fill } from "react-icons/ri"
 import {
     useMoralis,
     useMoralisQuery,
     useMoralisSubscription,
     useWeb3ExecuteFunction,
 } from "react-moralis";
-import Navbar from "../../Component/Navbar/Index";
 import styles from "./style.module.scss";
 import abi from "./../../assets/abi.json";
 
@@ -96,13 +96,16 @@ function Contribution({ username, userAddress }) {
 
         fetch({
             params: options,
-            onSuccess: (tx) =>
-                tx.wait().then((newTx) => {
-                    setNote("");
-                    setAmount(1);
+            onSuccess: (tx) => {
+                setNote("");
+                setAmount(1);
+                return tx.wait().then((newTx) => {
                     console.log(newTx);
-                }),
-            onError: (error) => console.log(error),
+                });
+            },
+            onError: (error) => {
+                console.log(error);
+            },
         });
     };
 
@@ -123,7 +126,6 @@ function Contribution({ username, userAddress }) {
 
     return (
         <div className={styles.Contribution}>
-            <Navbar />
             <div className={styles.Header}>
                 <div className={styles.profilePicture}></div>
             </div>
@@ -194,7 +196,7 @@ function Contribution({ username, userAddress }) {
                         Buy <span>{fullName}</span> a coffee
                     </h3>
                     <div className={styles.input}>
-                        <span className={styles.material}>☕</span> x
+                        <RiHeart2Fill fill="red" size="2.5em" /> x
                         <span
                             className={[
                                 styles.quickValue,

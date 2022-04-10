@@ -11,7 +11,7 @@ import abi from "./../../assets/abi.json";
 
 export default function Display() {
     const parameters = useParams();
-    const { isWeb3Enabled, isAuthenticated, isInitialized } = useMoralis();
+    const { isAuthenticated, isInitialized } = useMoralis();
     const [validUsername, setValidUsername] = useState(false);
     const [address, setAddress] = useState("");
 
@@ -27,8 +27,6 @@ export default function Display() {
     });
 
     useEffect(() => {
-        console.log(isAuthenticated, isInitialized);
-
         runContractFunction({
             onSuccess: (tx) => {
                 console.log(tx);
@@ -39,7 +37,7 @@ export default function Display() {
                 console.log(error);
             },
         });
-    }, [isAuthenticated, isInitialized]);
+    }, [isInitialized]);
 
     return validUsername ? (
         <Contribution username={parameters.username} userAddress={address} />

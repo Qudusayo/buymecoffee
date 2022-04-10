@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Routes, Route } from "react-router-dom";
 
@@ -6,20 +6,30 @@ import Display from "./Pages/Display/Index";
 import Home from "./Pages/Home/Index";
 import ChainBanner from "./Component/ChainBanner/Index";
 import Dashboard from "./Pages/Dashboard/Index";
+import useMetamask from "./Hooks/useMetamask";
+import Modal from "./Component/Modal/Index";
+import Navbar from "./Component/Navbar/Index";
 
 function App() {
-    const { enableWeb3, isWeb3Enabled, chainId, account } = useMoralis();
+    const { enableWeb3, isWeb3Enabled, chainId } = useMoralis();
+    const isMetaMaskInstalled = useMetamask();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         if (!isWeb3Enabled) {
-            enableWeb3();
+            if (isMetaMaskInstalled) {
+                enableWeb3();
+            } else {
+                enableWeb3({ provider: "walletconnect" });
+            }
         }
-        console.log(account)
-    }, [isWeb3Enabled, account]);
+    }, [isWeb3Enabled]);
 
     return (
         <>
             <ChainBanner chain={chainId} />
+            {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
+            <Navbar setIsModalOpen={setIsModalOpen} />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />

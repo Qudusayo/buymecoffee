@@ -1,16 +1,22 @@
 import React from "react";
 import { useMoralis } from "react-moralis";
+import { useLocation } from "react-router-dom";
 import styles from "./style.module.scss";
 
-function Navbar({ isTransparent }) {
-    const { authenticate, isAuthenticated, user, logout } = useMoralis();
+function Navbar({ setIsModalOpen }) {
+    const { isAuthenticated, user } = useMoralis();
+    const { pathname } = useLocation();
+    const transparentPaths = ["/"];
 
-    const authUser = () => {
-        if (!isAuthenticated) {
-            authenticate();
-        } else {
-            logout();
-        }
+    function disableScroll() {
+        window.onscroll = function () {
+            window.scrollTo(0, 0);
+        };
+    }
+
+    const openModal = () => {
+        disableScroll();
+        return setIsModalOpen(true);
     };
 
     const sliceAddress = (address) => {
@@ -25,11 +31,11 @@ function Navbar({ isTransparent }) {
         <nav
             className={[
                 styles.Navbar,
-                isTransparent ? styles.transparent : null,
+                transparentPaths.includes(pathname) ? styles.transparent : null,
             ].join(" ")}
         >
             <h3>PayForMyCoffee</h3>
-            <button onClick={authUser}>
+            <button onClick={openModal}>
                 {isAuthenticated
                     ? sliceAddress(user.get("ethAddress"))
                     : "Login"}

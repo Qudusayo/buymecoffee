@@ -1,28 +1,49 @@
 {
-  "name": "web3-buymeacoffee",
-  "private":"true",
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.5",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "chai": "^4.3.6",
-    "ethereum-waffle": "^3.4.4",
-    "ethers": "^5.6.1",
-    "hardhat": "^2.9.1"
-  },
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "dotenv": "^16.0.0"
-  },
-  "description": "This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.",
-  "version": "1.0.0",
-  "main": "hardhat.config.js",
-  "directories": {
-    "test": "test"
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@walletconnect/web3-provider": "^1.7.7",
+    "moralis": "^1.5.7",
+    "react": "^18.0.0",
+    "react-blockies": "^1.4.1",
+    "react-dom": "^18.0.0",
+    "react-error-overlay": "6.0.9",
+    "react-icons": "^4.3.1",
+    "react-moralis": "^1.3.4",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "4.0.3",
+    "sass": "^1.49.9",
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "npm start --prefix client",
-    "build": "npm run build --prefix client",
-    "vercel-preinstall": "npm install --prefix client"
+    "start": "react-scripts start",
+    "build": "BUILD_PATH='../build' react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "author": "qudusayo"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  }
 }

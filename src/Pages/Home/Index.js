@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 
 import { useWeb3ExecuteFunction } from "react-moralis";
-import Navbar from "../../Component/Navbar/Index";
 import abi from "./../../assets/abi.json";
 
 function Home() {
@@ -39,7 +38,6 @@ function Home() {
 
     return (
         <>
-            <Navbar isTransparent={true} />
             <div className={styles.Home}>
                 <div className={styles.Info}>
                     <h1>A supporter is worth a thousand followers.</h1>
