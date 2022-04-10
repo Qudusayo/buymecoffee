@@ -47,7 +47,7 @@ function Home() {
                     </p>
                     <form className={styles.Form} onSubmit={submitFormHandler}>
                         <div>
-                            <span>payformycoffe.crypto/</span>
+                            <span>web3support.com/</span>
                             <input
                                 placeholder="yourname"
                                 onChange={setUsernameHandler}

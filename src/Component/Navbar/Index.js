@@ -1,6 +1,6 @@
 import React from "react";
 import { useMoralis } from "react-moralis";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./style.module.scss";
 
 function Navbar({ setIsModalOpen }) {
@@ -34,7 +34,9 @@ function Navbar({ setIsModalOpen }) {
                 transparentPaths.includes(pathname) ? styles.transparent : null,
             ].join(" ")}
         >
-            <h3>PayForMyCoffee</h3>
+            <h3>
+                <Link to={"/"}>Web3Support</Link>
+            </h3>
             <button onClick={openModal}>
                 {isAuthenticated
                     ? sliceAddress(user.get("ethAddress"))

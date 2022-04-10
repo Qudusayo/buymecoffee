@@ -10,7 +10,11 @@
 
     h3 {
         margin: 0;
-        color: #ffffff;
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
     }
 
     button {
@@ -42,7 +46,9 @@
     border-bottom: 1px solid #dedede;
 
     h3 {
-        color: #000000;
+        a {
+            color: #000000;
+        }
     }
 
     button {

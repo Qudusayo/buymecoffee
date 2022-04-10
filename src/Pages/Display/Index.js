@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {
-    useApiContract,
-    useMoralis,
-} from "react-moralis";
+import { useApiContract, useMoralis } from "react-moralis";
 import { useParams } from "react-router-dom";
 
 import Contribution from "../Contribution/Index";
 import Error404 from "../Error404/Index";
+import Resolving from "../../Component/Resolving/Index";
 import abi from "./../../assets/abi.json";
 
 export default function Display() {
     const parameters = useParams();
-    const { isAuthenticated, isInitialized } = useMoralis();
+    const { isInitialized } = useMoralis();
     const [validUsername, setValidUsername] = useState(false);
+    const [resolved, setResolved] = useState(false);
     const [address, setAddress] = useState("");
 
     const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
@@ -27,21 +26,31 @@ export default function Display() {
     });
 
     useEffect(() => {
-        runContractFunction({
-            onSuccess: (tx) => {
-                console.log(tx);
-                setAddress(tx);
-                setValidUsername(true);
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
+        isInitialized &&
+            runContractFunction({
+                onSuccess: (tx) => {
+                    console.log(tx);
+                    setAddress(tx);
+                    setValidUsername(true);
+                    setResolved(true);
+                },
+                onError: (error) => {
+                    setResolved(true);
+                    console.log(error);
+                },
+            });
     }, [isInitialized]);
 
-    return validUsername ? (
-        <Contribution username={parameters.username} userAddress={address} />
+    return resolved ? (
+        validUsername ? (
+            <Contribution
+                username={parameters.username}
+                userAddress={address}
+            />
+        ) : (
+            <Error404 />
+        )
     ) : (
-        <Error404 />
+        <Resolving />
     );
 }
