@@ -84,7 +84,7 @@ function Contribution({ username, userAddress }) {
             _note: note,
         };
 
-        let amount = 0.001;
+        // let amount = 0.001;
 
         let options = {
             contractAddress,
