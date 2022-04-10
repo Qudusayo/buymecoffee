@@ -85,12 +85,14 @@ const Modal = ({ setIsModalOpen }) => {
                     </div>
                     <div className={styles.modalActions}>
                         <div className={styles.actionsContainer}>
-                            <button
-                                className={styles.deleteBtn}
-                                onClick={isAuthenticated ? disAuth : auth}
-                            >
-                                Logout
-                            </button>
+                            {isAuthenticated && (
+                                <button
+                                    className={styles.deleteBtn}
+                                    onClick={isAuthenticated ? disAuth : auth}
+                                >
+                                    Logout
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
