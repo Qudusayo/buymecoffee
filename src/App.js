@@ -11,33 +11,33 @@ import Modal from "./Component/Modal/Index";
 import Navbar from "./Component/Navbar/Index";
 
 function App() {
-    const { enableWeb3, isWeb3Enabled, chainId } = useMoralis();
-    const isMetaMaskInstalled = useMetamask();
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const { enableWeb3, isWeb3Enabled, chainId } = useMoralis();
+  const isMetaMaskInstalled = useMetamask();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    useEffect(() => {
-        if (!isWeb3Enabled) {
-            if (isMetaMaskInstalled) {
-                enableWeb3();
-            } else {
-                enableWeb3({ provider: "walletconnect" });
-            }
-        }
-    }, [isWeb3Enabled]);
+  useEffect(() => {
+    if (!isWeb3Enabled) {
+      if (isMetaMaskInstalled) {
+        enableWeb3();
+      } else {
+        enableWeb3({ provider: "walletconnect" });
+      }
+    }
+  }, [isWeb3Enabled]);
 
-    return (
-        <>
-            <ChainBanner chain={chainId} />
-            {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
-            <Navbar setIsModalOpen={setIsModalOpen} />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/dashboard/:route" element={<Dashboard />} />
-                <Route path="/:username" element={<Display />} />
-            </Routes>
-        </>
-    );
+  return (
+    <>
+      <ChainBanner chain={chainId} />
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
+      <Navbar setIsModalOpen={setIsModalOpen} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:route" element={<Dashboard />} />
+        <Route path="/:username" element={<Display />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;

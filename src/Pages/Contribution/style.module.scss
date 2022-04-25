@@ -1,285 +1,285 @@
 @mixin shareButton {
-    display: block;
-    outline: none;
-    border: none;
-    border-radius: 25px;
-    background-color: #dedede;
-    padding: 0.3em 1em;
-    cursor: pointer;
-    margin-top: 0.5em;
-    font-size: 0.9em;
+  display: block;
+  outline: none;
+  border: none;
+  border-radius: 25px;
+  background-color: #dedede;
+  padding: 0.3em 1em;
+  cursor: pointer;
+  margin-top: 0.5em;
+  font-size: 0.9em;
 }
 
 .Contribution {
-    .Header {
+  .Header {
+    width: 100%;
+    height: 31.1vmin;
+    background-image: url("./../../assets/images/banner.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    .profilePicture {
+      background-image: url("./../../assets/images/profile.png");
+      width: 15vmin;
+      height: 15vmin;
+      background-position: center;
+      background-size: contain;
+      border-radius: 100%;
+      border: 5px solid #ffffff;
+      margin: auto;
+      bottom: -12%;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+
+      @media screen and (max-width: 468px) {
+        width: 110px;
+        height: 110px;
+        bottom: -25%;
+      }
+    }
+  }
+
+  .Info {
+    margin-top: 2.1em;
+    text-align: center;
+
+    h1 {
+      margin: 0.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 0;
+
+      &:nth-of-type(1) {
+        margin-bottom: 0.5em;
+      }
+
+      &.supporters {
+        color: gray;
+      }
+    }
+  }
+
+  .supportBlock {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 5em;
+
+    .supportInfo {
+      flex: 4;
+      margin-right: 1em;
+
+      &Data {
+        border: 1px solid #dedede;
+        border-radius: 7px;
         width: 100%;
-        height: 31.1vmin;
-        background-image: url("./../../assets/images/banner.png");
-        background-size: cover;
-        background-position: center;
-        position: relative;
+        padding: 1em;
+        // word-break: break-all;
+        word-wrap: break-word;
+        box-sizing: border-box;
+      }
 
-        .profilePicture {
-            background-image: url("./../../assets/images/profile.png");
-            width: 15vmin;
-            height: 15vmin;
-            background-position: center;
-            background-size: contain;
-            border-radius: 100%;
-            border: 5px solid #ffffff;
-            margin: auto;
-            bottom: -12%;
-            left: 50%;
-            transform: translateX(-50%);
-            position: absolute;
+      .showMore {
+        @include shareButton();
+        width: 100%;
+        height: 50px;
+        font-size: 1.1em;
 
-            @media screen and (max-width: 468px) {
-                width: 110px;
-                height: 110px;
-                bottom: -25%;
-            }
+        &:hover {
+          background-color: #cdcdcd;
         }
-    }
+      }
 
-    .Info {
-        margin-top: 2.1em;
-        text-align: center;
+      &rmation {
+        border: 1px solid #dedede;
+        border-radius: 7px;
+        width: 100%;
+        padding: 1em;
+        margin: 1em 0;
+        word-wrap: break-word;
+        box-sizing: border-box;
 
-        h1 {
-            margin: 0.5em;
-        }
+        &Header {
+          display: flex;
+          align-items: flex-start;
 
-        p {
-            font-size: 1.2em;
-            margin: 0;
+          .supportInformationIcon {
+            border-radius: 50%;
+          }
 
-            &:nth-of-type(1) {
-                margin-bottom: 0.5em;
-            }
-
-            &.supporters {
-                color: gray;
-            }
-        }
-    }
-
-    .supportBlock {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        width: 70%;
-        margin: auto;
-        margin-top: 2em;
-        margin-bottom: 5em;
-
-        .supportInfo {
-            flex: 4;
-            margin-right: 1em;
-
-            &Data {
-                border: 1px solid #dedede;
-                border-radius: 7px;
-                width: 100%;
-                padding: 1em;
-                // word-break: break-all;
-                word-wrap: break-word;
-                box-sizing: border-box;
-            }
-
-            .showMore{
-                @include shareButton();
-                width: 100%;
-                height: 50px;
-                font-size: 1.1em;
-
-                &:hover{
-                    background-color: #cdcdcd;
-                }
-            }
-
-            &rmation {
-                border: 1px solid #dedede;
-                border-radius: 7px;
-                width: 100%;
-                padding: 1em;
-                margin: 1em 0;
-                word-wrap: break-word;
-                box-sizing: border-box;
-
-                &Header {
-                    display: flex;
-                    align-items: flex-start;
-
-                    .supportInformationIcon {
-                        border-radius: 50%;
-                    }
-
-                    p {
-                        margin: 0.5em 0 0 0.5em;
-
-                        button {
-                            @include shareButton();
-                        }
-                    }
-                }
-
-                &Message {
-                    border: 1px solid lighten($color: #8247e5, $amount: 20);
-                    background-color: lighten($color: #8247e5, $amount: 45);
-                    padding: 1em;
-                    border-radius: 7px;
-                    margin-top: 1em;
-                    position: relative;
-                    z-index: -10;
-
-                    div {
-                        position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        background-color: lighten($color: #8247e5, $amount: 45);
-                        border: 1px solid lighten($color: #8247e5, $amount: 20);
-                        border-radius: 2px;
-                        transform: rotate(45deg);
-                        top: -7px;
-                        z-index: -100;
-                        border-right: none;
-                        border-bottom: none;
-                    }
-
-                    button {
-                        @include shareButton();
-                    }
-                }
-            }
-        }
-
-        .support {
-            flex: 2.2;
-            border: 1px solid #dedede;
-            padding: 2em;
-            border-radius: 7px;
-            margin-left: 1em;
-
-            .input {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                border: 1px solid lighten($color: #8247e5, $amount: 20);
-                background-color: lighten($color: #8247e5, $amount: 45);
-                padding: 1em;
-                margin: 1em auto;
-                border-radius: 7px;
-
-                .material {
-                    font-size: 3em;
-                }
-
-                .quickValue {
-                    color: #8247e5;
-                    background-color: #ffffff;
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    border: 1px solid lighten($color: #8247e5, $amount: 35);
-                    cursor: pointer;
-
-                    &:hover {
-                        border: 1px solid lighten($color: #8247e5, $amount: 20);
-                    }
-
-                    &Active {
-                        border: #8247e5;
-                        background-color: #8247e5;
-                        color: #ffffff;
-                    }
-                }
-
-                input {
-                    width: 35px;
-                    height: 35px;
-                    font-size: 1.1em;
-                    text-align: center;
-                    padding: 0 0.2em;
-                    outline: none;
-                    border: 1px solid #dedede;
-                    border-radius: 5px;
-
-                    &::-webkit-outer-spin-button,
-                    &::-webkit-inner-spin-button {
-                        -webkit-appearance: none;
-                        margin: 0;
-                    }
-                }
-            }
-
-            h3 {
-                margin: 0;
-                font-size: 1.5em;
-                span {
-                    color: gray;
-                }
-            }
-
-            textarea {
-                width: 100%;
-                display: block;
-                font-size: 1em;
-                height: 90px;
-                padding: 4%;
-                outline: none;
-                border-radius: 7px;
-                border: 1px solid #dedede;
-                box-sizing: border-box;
-            }
+          p {
+            margin: 0.5em 0 0 0.5em;
 
             button {
-                display: block;
-                margin-top: 2em;
-                font-size: 1em;
-                text-align: center;
-                outline: none;
-                border: none;
-                border-radius: 25px;
-                width: 100%;
-                height: 50px;
-                background-color: #8247e5;
-                color: #ffffff;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: lighten($color: #8247e5, $amount: 3);
-                }
-
-                &:disabled {
-                    background-color: #8247e5;
-                    cursor: not-allowed;
-                }
+              @include shareButton();
             }
-
-            @media screen and (max-width: 992px) {
-                margin-bottom: 2em;
-            }
-
-            @media screen and (max-width: 481px) {
-                width: 100%;
-                box-sizing: border-box;
-                margin: 0 auto 2em;
-            }
+          }
         }
 
-        @media screen and (max-width: 992px) {
-            flex-direction: column-reverse;
-            align-items: center;
-            width: 94%;
+        &Message {
+          border: 1px solid lighten($color: #8247e5, $amount: 20);
+          background-color: lighten($color: #8247e5, $amount: 45);
+          padding: 1em;
+          border-radius: 7px;
+          margin-top: 1em;
+          position: relative;
+          z-index: -10;
 
-            .supportInfo {
-                width: 100%;
-                margin: auto;
-            }
+          div {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: lighten($color: #8247e5, $amount: 45);
+            border: 1px solid lighten($color: #8247e5, $amount: 20);
+            border-radius: 2px;
+            transform: rotate(45deg);
+            top: -7px;
+            z-index: -100;
+            border-right: none;
+            border-bottom: none;
+          }
+
+          button {
+            @include shareButton();
+          }
         }
+      }
     }
+
+    .support {
+      flex: 2.2;
+      border: 1px solid #dedede;
+      padding: 2em;
+      border-radius: 7px;
+      margin-left: 1em;
+
+      .input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid lighten($color: #8247e5, $amount: 20);
+        background-color: lighten($color: #8247e5, $amount: 45);
+        padding: 1em;
+        margin: 1em auto;
+        border-radius: 7px;
+
+        .material {
+          font-size: 3em;
+        }
+
+        .quickValue {
+          color: #8247e5;
+          background-color: #ffffff;
+          width: 35px;
+          height: 35px;
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border: 1px solid lighten($color: #8247e5, $amount: 35);
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid lighten($color: #8247e5, $amount: 20);
+          }
+
+          &Active {
+            border: #8247e5;
+            background-color: #8247e5;
+            color: #ffffff;
+          }
+        }
+
+        input {
+          width: 35px;
+          height: 35px;
+          font-size: 1.1em;
+          text-align: center;
+          padding: 0 0.2em;
+          outline: none;
+          border: 1px solid #dedede;
+          border-radius: 5px;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1.5em;
+        span {
+          color: gray;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        display: block;
+        font-size: 1em;
+        height: 90px;
+        padding: 4%;
+        outline: none;
+        border-radius: 7px;
+        border: 1px solid #dedede;
+        box-sizing: border-box;
+      }
+
+      button {
+        display: block;
+        margin-top: 2em;
+        font-size: 1em;
+        text-align: center;
+        outline: none;
+        border: none;
+        border-radius: 25px;
+        width: 100%;
+        height: 50px;
+        background-color: #8247e5;
+        color: #ffffff;
+        cursor: pointer;
+
+        &:hover {
+          background-color: lighten($color: #8247e5, $amount: 3);
+        }
+
+        &:disabled {
+          background-color: #8247e5;
+          cursor: not-allowed;
+        }
+      }
+
+      @media screen and (max-width: 992px) {
+        margin-bottom: 2em;
+      }
+
+      @media screen and (max-width: 481px) {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto 2em;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      width: 94%;
+
+      .supportInfo {
+        width: 100%;
+        margin: auto;
+      }
+    }
+  }
 }

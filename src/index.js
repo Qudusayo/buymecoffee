@@ -8,16 +8,16 @@ import { BrowserRouter } from "react-router-dom";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <MoralisProvider
-            appId={process.env.REACT_APP_MORALIS_APPID}
-            serverUrl={process.env.REACT_APP_MORALIS_SERVER_URL}
-        >
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </MoralisProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <MoralisProvider
+      appId={process.env.REACT_APP_MORALIS_APPID}
+      serverUrl={process.env.REACT_APP_MORALIS_SERVER_URL}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MoralisProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

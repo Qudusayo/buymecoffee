@@ -1,43 +1,43 @@
 .spinner {
-    margin: auto;
-    width: 100%;
-    text-align: center;
+  margin: auto;
+  width: 100%;
+  text-align: center;
 
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
 
-    & > div {
-        width: 45px;
-        height: 45px;
-        background-color: lighten($color: #8247e5, $amount: 35%);
-        margin-left: 0.3em;
+  & > div {
+    width: 45px;
+    height: 45px;
+    background-color: lighten($color: #8247e5, $amount: 35%);
+    margin-left: 0.3em;
 
-        border-radius: 100%;
-        display: inline-block;
-        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    }
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
 
-    .bounce1 {
-        animation-delay: -0.32s;
-    }
+  .bounce1 {
+    animation-delay: -0.32s;
+  }
 
-    .bounce2 {
-        animation-delay: -0.16s;
-    }
+  .bounce2 {
+    animation-delay: -0.16s;
+  }
 }
 
 @keyframes sk-bouncedelay {
-    0%,
-    80%,
-    100% {
-        -webkit-transform: scale(0);
-        transform: scale(0);
-    }
-    40% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

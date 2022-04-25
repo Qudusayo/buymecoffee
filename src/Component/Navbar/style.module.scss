@@ -1,57 +1,57 @@
 .Navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5em 2em;
-    width: 100%;
-    position: absolute;
-    box-sizing: border-box;
-    z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 2em;
+  width: 100%;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 100;
 
-    h3 {
-        margin: 0;
+  h3 {
+    margin: 0;
 
-        a {
-            color: #ffffff;
-            text-decoration: none;
-        }
+    a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+
+  button {
+    display: block;
+    font-size: 0.9em;
+    text-align: center;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    height: 45px;
+    padding: 0 2em;
+    color: #8247e5;
+    background-color: #ffffff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($color: #ffffff, $amount: 3);
     }
 
-    button {
-        display: block;
-        font-size: 0.9em;
-        text-align: center;
-        outline: none;
-        border: none;
-        border-radius: 25px;
-        height: 45px;
-        padding: 0 2em;
-        color: #8247e5;
-        background-color: #ffffff;
-        cursor: pointer;
-
-        &:hover {
-            background-color: darken($color: #ffffff, $amount: 3);
-        }
-
-        &:disabled {
-            background-color: #8247e5;
-            color: #ffffff;
-            cursor: not-allowed;
-        }
+    &:disabled {
+      background-color: #8247e5;
+      color: #ffffff;
+      cursor: not-allowed;
     }
+  }
 }
 
 .transparent {
-    border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
 
-    h3 {
-        a {
-            color: #000000;
-        }
+  h3 {
+    a {
+      color: #000000;
     }
+  }
 
-    button {
-        background-color: #dedede;
-    }
+  button {
+    background-color: #dedede;
+  }
 }

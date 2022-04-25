@@ -1,138 +1,138 @@
 .darkBG {
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 .centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal {
-    width: 32em;
-    max-width: 90vw;
-    box-sizing: border-box;
-    padding-top: .5em;
+  width: 32em;
+  max-width: 90vw;
+  box-sizing: border-box;
+  padding-top: 0.5em;
+  background: white;
+  color: white;
+  z-index: 10;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+
+  &Header {
+    height: 50px;
     background: white;
-    color: white;
-    z-index: 10;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
 
-    &Header {
-        height: 50px;
-        background: white;
-        overflow: hidden;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
-    }
+  &Content {
+    padding: 10px;
+    padding-bottom: 0;
+    font-size: 14px;
+    color: #2c3e50;
+    text-align: center;
 
-    &Content {
-        padding: 10px;
-        padding-bottom: 0;
-        font-size: 14px;
-        color: #2c3e50;
-        text-align: center;
+    div {
+      border: 1px solid #dedede;
+      border-radius: 5px;
+      margin: 0.5em 0;
+      display: flex;
+      align-items: center;
+      padding: 0 2em;
+      cursor: pointer;
+      transition: all 0.25s ease;
 
-        div{
-            border: 1px solid #dedede;
-            border-radius: 5px;
-            margin: .5em 0;
-            display: flex;
-            align-items: center;
-            padding: 0 2em;
-            cursor: pointer;
-            transition: all 0.25s ease;
+      &:hover {
+        background-color: #dedede;
+      }
 
-            &:hover{
-                background-color: #dedede;
-            }
+      h2 {
+        font-weight: normal;
+        font-size: 1.2em;
+      }
 
-            h2{
-                font-weight: normal;
-                font-size: 1.2em;
-            }
+      img {
+        width: 40px;
+        margin-right: 2em;
+      }
 
-            img{
-                width: 40px;
-                margin-right: 2em;
-            }
+      &.accountInfo {
+        padding: 0.4em 0 0.4em 2em;
 
-            &.accountInfo{
-                padding:  .4em 0 .4em 2em;
-
-                .supportInformationIcon {
-                    border-radius: 12px;
-                    margin-right: 2em;
-                }
-            }
+        .supportInformationIcon {
+          border-radius: 12px;
+          margin-right: 2em;
         }
+      }
     }
+  }
 
-    &Actions {
-        width: 97%;
-        margin: 0 auto;
+  &Actions {
+    width: 97%;
+    margin: 0 auto;
 
-        .actionsContainer{
-            padding-bottom: .5em;
-        }
+    .actionsContainer {
+      padding-bottom: 0.5em;
     }
+  }
 }
 
 .heading {
-    margin: 0;
-    padding: 10px;
-    color: #2c3e50;
-    font-weight: 500;
-    font-size: 18px;
-    text-align: center;
+  margin: 0;
+  padding: 10px;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
 }
 
 .closeBtn {
-    cursor: pointer;
-    font-weight: 500;
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: none;
-    font-size: 18px;
-    color: #2c3e50;
-    background: white;
-    transition: all 0.25s ease;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
-    position: absolute;
-    right: 0;
-    top: 0;
-    align-self: flex-end;
-    margin-top: -7px;
-    margin-right: -7px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 0;
+  top: 0;
+  align-self: flex-end;
+  margin-top: -7px;
+  margin-right: -7px;
 }
 
 .closeBtn:hover {
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-    transform: translate(-4px, 4px);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  transform: translate(-4px, 4px);
 }
 
 .deleteBtn {
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1.2em;
-    padding: 11px 28px;
-    border-radius: 7px;
-    border: none;
-    color: #fff;
-    background: #ff3e4e;
-    width: 100%;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.2em;
+  padding: 11px 28px;
+  border-radius: 7px;
+  border: none;
+  color: #fff;
+  background: #ff3e4e;
+  width: 100%;
 }
 
 .deleteBtn:hover {
-    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
-    background: #ff3e4e;
+  box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+  background: #ff3e4e;
 }

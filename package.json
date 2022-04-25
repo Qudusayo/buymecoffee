@@ -7,6 +7,7 @@
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@walletconnect/web3-provider": "^1.7.7",
+    "@web3auth/web3auth": "^0.8.2",
     "moralis": "^1.5.7",
     "react": "^18.0.0",
     "react-blockies": "^1.4.1",
@@ -23,7 +24,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
+    "format": "npm run prettier:fix"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +49,8 @@
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2"
   }
 }
