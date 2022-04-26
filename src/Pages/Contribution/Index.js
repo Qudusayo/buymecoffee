@@ -23,11 +23,11 @@ function Contribution({ username, userAddress }) {
   const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
   const { fetch } = useWeb3ExecuteFunction();
-  const Query = useMoralisQuery("Donation", (query) => query, [userAddress], {
+  const Query = useMoralisQuery("Donor", (query) => query, [userAddress], {
     autoFetch: true,
     live: true,
   });
-  useMoralisSubscription("aDonation", (q) => q, [], {
+  useMoralisSubscription("Donor", (q) => q, [], {
     onUpdate: () => Query.fetch(),
     enabled: true,
   });
@@ -140,7 +140,7 @@ function Contribution({ username, userAddress }) {
                 <div className={styles.supportInformationHeader}>
                   <Blockies
                     seed={eachSupport.sender}
-                    size={15}
+                    size={12}
                     scale={3}
                     bgColor="#6610f2"
                     className={styles.supportInformationIcon}
@@ -151,11 +151,13 @@ function Contribution({ username, userAddress }) {
                     {/* <button>Share</button> */}
                   </p>
                 </div>
-                <div className={styles.supportInformationMessage}>
-                  <div></div>
-                  {eachSupport.message}
-                  <button>Share</button>
-                </div>
+                {eachSupport.message && (
+                  <div className={styles.supportInformationMessage}>
+                    <div></div>
+                    {eachSupport.message}
+                    <button>Share</button>
+                  </div>
+                )}
               </div>
             ))}
             {!(support.length === totalSupport.length) && (
