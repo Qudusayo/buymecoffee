@@ -23,11 +23,11 @@ function Contribution({ username, userAddress }) {
   const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
   const { fetch } = useWeb3ExecuteFunction();
-  const Query = useMoralisQuery("Donor", (query) => query, [userAddress], {
+  const Query = useMoralisQuery("Donation", (query) => query, [userAddress], {
     autoFetch: true,
     live: true,
   });
-  useMoralisSubscription("Donor", (q) => q, [], {
+  useMoralisSubscription("Donation", (q) => q, [], {
     onUpdate: () => Query.fetch(),
     enabled: true,
   });
@@ -89,6 +89,7 @@ function Contribution({ username, userAddress }) {
     fetch({
       params: options,
       onSuccess: (tx) => {
+        console.log(tx);
         setNote("");
         setAmount(1);
         return tx.wait().then((newTx) => {
@@ -209,7 +210,7 @@ function Contribution({ username, userAddress }) {
             />
           </div>
           <textarea
-            placeholder="Say something nice.. (optional)"
+            placeholder="Say something nice.. (Required For Now)"
             onChange={setNoteHandler}
             value={note}
           ></textarea>

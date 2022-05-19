@@ -11752,10 +11752,10 @@ mock-fs@^4.1.0:
   resolved "https://registry.yarnpkg.com/mock-fs/-/mock-fs-4.14.0.tgz#ce5124d2c601421255985e6e94da80a7357b1b18"
   integrity sha512-qYvlv/exQ4+svI3UOvPUpLDF0OMX5euvUH0Ny4N5QyRyhNdgAgUrVH3iUINSzEPLvx0kbo/Bp28GJKIqvE7URw==
 
-moralis@^1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/moralis/-/moralis-1.5.11.tgz#6d89f09aeaa2bf5be77d8ed5da9f32ba8628d619"
-  integrity sha512-JmtW13miPDQ2LUr9KN3Lzh1ekjf5BUCPENx0peejipWVwPtA/AsW9iMK9/SyIrXGNDYPodcJcRMmh1voZ3fCrg==
+moralis@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/moralis/-/moralis-1.7.0.tgz#2d39fd54e56982402c0b5177c4c5b1457e2a81ec"
+  integrity sha512-hgVdUQvm6a1zZGxODemLgMDMlMXPRQS1685NhZ6uz4Q94KeiMRxvYFN/N2yzhi4dAT5Qb0RMjzZh16ylgalwaA==
   dependencies:
     "@babel/runtime" "7.16.7"
     "@babel/runtime-corejs3" "7.16.8"
@@ -16639,10 +16639,8 @@ watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
-    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
-    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"

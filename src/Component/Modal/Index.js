@@ -26,7 +26,7 @@ const Modal = ({ setIsModalOpen }) => {
       provider,
       clientId:
         "BGny-kghxFcbCNbfNFn1t66jwqxtnr2744vQ9aHHr06u7jhe9iI1nm1zPKLkVKer0cW2F6Weip8FZ24rwfMwFEs",
-      chainId: "0xa869",
+      chainId: process.env.REACT_APP_SUPPORTED_CHAIN_ID,
       onSuccess: (user) => {
         console.log(user);
         return closeModal();
@@ -40,13 +40,11 @@ const Modal = ({ setIsModalOpen }) => {
     return setIsModalOpen(false);
   };
 
-  const sliceAddress = (address) => {
-    return (
-      address.slice(0, 9) +
+  const sliceAddress = (address) =>
+    address &&
+    address.slice(0, 9) +
       "..." +
-      address.slice(address.length - 9, address.length)
-    );
-  };
+      address.slice(address.length - 9, address.length);
 
   return (
     <>
@@ -80,9 +78,13 @@ const Modal = ({ setIsModalOpen }) => {
                   <img src={Metamask} alt="metamask" />
                   <h2>METAMASK</h2>
                 </div>
+                {/* <div onClick={() => auth("walletconnect")}>
+                  <img src={WalletConnect} alt="walletconnect" />
+                  <h2>WalletConnect</h2>
+                </div> */}
                 <div onClick={() => auth("web3Auth")}>
                   <img src={WalletConnect} alt="walletconnect" />
-                  <h2>WALLETCONNECT</h2>
+                  <h2>Social Login</h2>
                 </div>
               </>
             )}

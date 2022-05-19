@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMoralis } from "react-moralis";
+import { useChain, useMoralis } from "react-moralis";
 import { Routes, Route } from "react-router-dom";
 
 import Display from "./Pages/Display/Index";
@@ -11,7 +11,8 @@ import Modal from "./Component/Modal/Index";
 import Navbar from "./Component/Navbar/Index";
 
 function App() {
-  const { enableWeb3, isWeb3Enabled, chainId } = useMoralis();
+  const { enableWeb3, isWeb3Enabled, isAuthenticated, user } = useMoralis();
+  const { chainId } = useChain();
   const isMetaMaskInstalled = useMetamask();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -20,10 +21,15 @@ function App() {
       if (isMetaMaskInstalled) {
         enableWeb3();
       } else {
-        enableWeb3({ provider: "walletconnect" });
+        enableWeb3({ provider: "web3Auth" });
       }
     }
   }, [isWeb3Enabled]);
+
+  useEffect(() => {
+    console.log(isAuthenticated);
+    console.log(user)
+  }, [isAuthenticated]);
 
   return (
     <>
