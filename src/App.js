@@ -7,14 +7,12 @@ import Home from "./Pages/Home/Index";
 import ChainBanner from "./Component/ChainBanner/Index";
 import Dashboard from "./Pages/Dashboard/Index";
 import useMetamask from "./Hooks/useMetamask";
-import Modal from "./Component/Modal/Index";
 import Navbar from "./Component/Navbar/Index";
 
 function App() {
   const { enableWeb3, isWeb3Enabled, isAuthenticated, user } = useMoralis();
   const { chainId } = useChain();
   const isMetaMaskInstalled = useMetamask();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (!isWeb3Enabled) {
@@ -34,8 +32,7 @@ function App() {
   return (
     <>
       <ChainBanner chain={chainId} />
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
-      <Navbar setIsModalOpen={setIsModalOpen} />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />

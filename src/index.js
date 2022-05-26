@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
 import { BrowserRouter } from "react-router-dom";
+import { NotificationProvider } from "web3uikit";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
       serverUrl={process.env.REACT_APP_MORALIS_SERVER_URL}
     >
       <BrowserRouter>
-        <App />
+        <NotificationProvider>
+          <App />
+        </NotificationProvider>
       </BrowserRouter>
     </MoralisProvider>
   </React.StrictMode>,

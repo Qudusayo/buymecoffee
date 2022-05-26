@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Blockies from "react-blockies";
+import { Blockie, Button, TextArea, useNotification } from "web3uikit";
 import { RiHeart2Fill } from "react-icons/ri";
 import {
   useMoralis,
@@ -23,6 +23,7 @@ function Contribution({ username, userAddress }) {
   const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
   const { fetch } = useWeb3ExecuteFunction();
+  const dispatch = useNotification();
   const Query = useMoralisQuery("Donation", (query) => query, [userAddress], {
     autoFetch: true,
     live: true,
@@ -54,6 +55,15 @@ function Contribution({ username, userAddress }) {
     setSupporters(Object.keys(_supporters).length);
     // console.log(Query.data);
   }, [isWeb3Enabled, Query.data]);
+
+  const handleNewNotification = (type) => {
+    dispatch({
+      type,
+      message: type === "success"? "Donation Successful" : "Donation Failed",
+      title: type === "success"? "Success" : "Error",
+      position: "topR",
+    });
+  };
 
   const onChangeHandler = (e) => {
     let manualAmount = e.target.value;
@@ -93,10 +103,12 @@ function Contribution({ username, userAddress }) {
         setNote("");
         setAmount(1);
         return tx.wait().then((newTx) => {
+          handleNewNotification("success");
           console.log(newTx);
         });
       },
       onError: (error) => {
+        handleNewNotification('error')
         console.log(error);
       },
     });
@@ -139,7 +151,7 @@ function Contribution({ username, userAddress }) {
             {support?.map((eachSupport, index) => (
               <div className={styles.supportInformation} key={index}>
                 <div className={styles.supportInformationHeader}>
-                  <Blockies
+                  <Blockie
                     seed={eachSupport.sender}
                     size={12}
                     scale={3}
@@ -156,15 +168,28 @@ function Contribution({ username, userAddress }) {
                   <div className={styles.supportInformationMessage}>
                     <div></div>
                     {eachSupport.message}
-                    <button>Share</button>
+                    <Button
+                      icon="telegram"
+                      iconLayout="trailing"
+                      id="test-button-secondary-icon-after"
+                      text="Share"
+                      theme="secondary"
+                      type="button"
+                      color="#6610f2"
+                    />
                   </div>
                 )}
               </div>
             ))}
             {!(support.length === totalSupport.length) && (
-              <button className={styles.showMore} onClick={() => seeMore()}>
-                See more
-              </button>
+              <Button
+                id="test-button"
+                onClick={() => seeMore()}
+                size="large"
+                text="See more"
+                theme="secondary"
+                type="button"
+              />
             )}
           </div>
         </div>
@@ -209,11 +234,14 @@ function Contribution({ username, userAddress }) {
               value={inputValue}
             />
           </div>
-          <textarea
-            placeholder="Say something nice.. (Required For Now)"
+          <TextArea
+            label="Message"
+            name="Test TextArea Default"
             onChange={setNoteHandler}
             value={note}
-          ></textarea>
+            placeholder="Say something nice.. (Required For Now)"
+            width="100%"
+          />
           <button
             type="button"
             disabled={amount < 1 || !isAuthenticated}

@@ -18,7 +18,8 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "4.0.3",
     "sass": "^1.49.9",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "web3uikit": "^0.1.153"
   },
   "scripts": {
     "start": "react-scripts start",
