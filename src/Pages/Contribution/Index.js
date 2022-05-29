@@ -11,7 +11,7 @@ import styles from "./style.module.scss";
 import ContractJSON from "./../../artifacts/contracts/BuyMeCoffee.sol/BuyMeCoffee.json";
 import QuickClick from "../../Component/QuickClick/QuickClick";
 
-function Contribution({ username, userAddress }) {
+function Contribution({ chain }) {
   const [fullName, setFullName] = useState("Qudusayo");
   const [creating, setCreating] = useState("Coding some stuffs");
   const [note, setNote] = useState("");
@@ -22,18 +22,14 @@ function Contribution({ username, userAddress }) {
   const [amount, setAmount] = useState(1);
   const [inputValue, setInputValue] = useState("");
   const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+  const supportedChain = process.env.REACT_APP_SUPPORTED_CHAIN_ID;
   const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
   const { fetch } = useWeb3ExecuteFunction();
   const dispatch = useNotification();
-  const Query = useMoralisQuery(
-    "BuyMeCoffee",
-    (query) => query,
-    [userAddress],
-    {
-      autoFetch: true,
-      live: true,
-    },
-  );
+  const Query = useMoralisQuery("BuyMeCoffee", (query) => query, [], {
+    autoFetch: true,
+    live: true,
+  });
   useMoralisSubscription("BuyMeCoffee", (q) => q, [], {
     onUpdate: () => Query.fetch(),
     enabled: true,
@@ -227,7 +223,9 @@ function Contribution({ username, userAddress }) {
           />
           <button
             type="button"
-            disabled={amount < 1 || !isAuthenticated}
+            disabled={
+              amount < 1 || !isAuthenticated || chain !== supportedChain
+            }
             onClick={donate}
           >
             Support {amount} $MATIC

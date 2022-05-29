@@ -7,6 +7,7 @@ import ChainBanner from "./Component/ChainBanner/Index";
 import useMetamask from "./Hooks/useMetamask.js";
 import Navbar from "./Component/Navbar/Index";
 import Contribution from "./Pages/Contribution/Index";
+import Footer from "./Component/Footer/Footer";
 
 function App() {
   const { enableWeb3, isWeb3Enabled, isAuthenticated, user } = useMoralis();
@@ -33,17 +34,10 @@ function App() {
       <ChainBanner chain={chainId} />
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Contribution
-              username={"qudusayo"}
-              userAddress={"0x874945fB93B64E670E1db7e159fB7f85b065871b"}
-            />
-          }
-        />
+        <Route path="/" element={<Contribution chain={chainId} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
+      <Footer />
     </>
   );
 }

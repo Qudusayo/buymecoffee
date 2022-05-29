@@ -214,7 +214,7 @@
         }
 
         &:disabled {
-          background-color: #8247e5;
+          background-color: lighten($color: #8247e5, $amount: 25);
           cursor: not-allowed;
         }
       }
