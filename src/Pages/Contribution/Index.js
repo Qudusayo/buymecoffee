@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Blockie, Button, TextArea, useNotification } from "web3uikit";
-import { RiHeart2Fill } from "react-icons/ri";
+import { RiCupFill } from "react-icons/ri";
 import {
   useMoralis,
   useMoralisQuery,
@@ -8,11 +8,12 @@ import {
   useWeb3ExecuteFunction,
 } from "react-moralis";
 import styles from "./style.module.scss";
-import abi from "./../../assets/abi.json";
+import ContractJSON from "./../../artifacts/contracts/BuyMeCoffee.sol/BuyMeCoffee.json";
+import QuickClick from "../../Component/QuickClick/QuickClick";
 
 function Contribution({ username, userAddress }) {
   const [fullName, setFullName] = useState("Qudusayo");
-  const [creating, setCreating] = useState("Programming some stuffs");
+  const [creating, setCreating] = useState("Coding some stuffs");
   const [note, setNote] = useState("");
   const [supporters, setSupporters] = useState(0);
   const [support, setSupport] = useState([]);
@@ -24,11 +25,16 @@ function Contribution({ username, userAddress }) {
   const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
   const { fetch } = useWeb3ExecuteFunction();
   const dispatch = useNotification();
-  const Query = useMoralisQuery("Donation", (query) => query, [userAddress], {
-    autoFetch: true,
-    live: true,
-  });
-  useMoralisSubscription("Donation", (q) => q, [], {
+  const Query = useMoralisQuery(
+    "BuyMeCoffee",
+    (query) => query,
+    [userAddress],
+    {
+      autoFetch: true,
+      live: true,
+    },
+  );
+  useMoralisSubscription("BuyMeCoffee", (q) => q, [], {
     onUpdate: () => Query.fetch(),
     enabled: true,
   });
@@ -36,10 +42,7 @@ function Contribution({ username, userAddress }) {
   useEffect(() => {
     const _supporters = {};
     const result = Query.data
-      ?.filter((each) => {
-        return each.get("reciever").toLowerCase() === userAddress.toLowerCase();
-      })
-      .map((data) => {
+      ?.map((data) => {
         _supporters[data.get("sender")] = 0;
         return {
           block_number: data.get("block_number"),
@@ -59,8 +62,8 @@ function Contribution({ username, userAddress }) {
   const handleNewNotification = (type) => {
     dispatch({
       type,
-      message: type === "success"? "Donation Successful" : "Donation Failed",
-      title: type === "success"? "Success" : "Error",
+      message: type === "success" ? "Donation Successful" : "Donation Failed",
+      title: type === "success" ? "Success" : "Error",
       position: "topR",
     });
   };
@@ -82,7 +85,6 @@ function Contribution({ username, userAddress }) {
 
   const donate = () => {
     let params = {
-      _username: username,
       _note: note,
     };
 
@@ -91,25 +93,26 @@ function Contribution({ username, userAddress }) {
     let options = {
       contractAddress,
       functionName: "donate",
-      abi,
+      abi: ContractJSON.abi,
       params,
       msgValue: Moralis.Units.ETH(amount),
     };
+    // console.log(options);
 
     fetch({
       params: options,
       onSuccess: (tx) => {
-        console.log(tx);
+        // console.log(tx);
         setNote("");
         setAmount(1);
         return tx.wait().then((newTx) => {
           handleNewNotification("success");
-          console.log(newTx);
+          // console.log(newTx);
         });
       },
       onError: (error) => {
-        handleNewNotification('error')
-        console.log(error);
+        handleNewNotification("error");
+        // console.log(error);
       },
     });
   };
@@ -123,7 +126,6 @@ function Contribution({ username, userAddress }) {
   };
 
   const seeMore = () => {
-    console.log(support);
     let newGap = sliceGap + 5;
     setSupport(totalSupport.slice(0, newGap));
     setSliceGap(newGap);
@@ -161,22 +163,12 @@ function Contribution({ username, userAddress }) {
                   <p>
                     <b>{sliceAddress(eachSupport.sender)}</b> bought{" "}
                     {Moralis.Units.FromWei(eachSupport.amount)} coffees
-                    {/* <button>Share</button> */}
                   </p>
                 </div>
                 {eachSupport.message && (
                   <div className={styles.supportInformationMessage}>
                     <div></div>
                     {eachSupport.message}
-                    <Button
-                      icon="telegram"
-                      iconLayout="trailing"
-                      id="test-button-secondary-icon-after"
-                      text="Share"
-                      theme="secondary"
-                      type="button"
-                      color="#6610f2"
-                    />
                   </div>
                 )}
               </div>
@@ -198,34 +190,25 @@ function Contribution({ username, userAddress }) {
             Buy <span>{fullName}</span> a coffee
           </h3>
           <div className={styles.input}>
-            <RiHeart2Fill fill="red" size="2.5em" /> x
-            <span
-              className={[
-                styles.quickValue,
-                amount === 1 ? styles.quickValueActive : null,
-              ].join(" ")}
-              onClick={() => setAmountHandler(1)}
-            >
-              1
+            <RiCupFill fill="#8247e5" size="2.5em" />{" "}
+            <span>
+              <b>x</b>
             </span>
-            <span
-              className={[
-                styles.quickValue,
-                amount === 3 ? styles.quickValueActive : null,
-              ].join(" ")}
-              onClick={() => setAmountHandler(3)}
-            >
-              3
-            </span>
-            <span
-              className={[
-                styles.quickValue,
-                amount === 5 ? styles.quickValueActive : null,
-              ].join(" ")}
-              onClick={() => setAmountHandler(5)}
-            >
-              5
-            </span>
+            <QuickClick
+              value={1}
+              amount={amount}
+              setAmountHandler={setAmountHandler}
+            />
+            <QuickClick
+              value={3}
+              amount={amount}
+              setAmountHandler={setAmountHandler}
+            />
+            <QuickClick
+              value={5}
+              amount={amount}
+              setAmountHandler={setAmountHandler}
+            />
             <input
               type="number"
               min="0"
@@ -235,11 +218,11 @@ function Contribution({ username, userAddress }) {
             />
           </div>
           <TextArea
-            label="Message"
+            label="Message  (Required)"
             name="Test TextArea Default"
             onChange={setNoteHandler}
             value={note}
-            placeholder="Say something nice.. (Required For Now)"
+            placeholder="Say something nice.."
             width="100%"
           />
           <button
