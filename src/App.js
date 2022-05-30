@@ -15,19 +15,14 @@ function App() {
   const isMetaMaskInstalled = useMetamask();
 
   useEffect(() => {
-    if (!isWeb3Enabled) {
+    if (!isWeb3Enabled && isAuthenticated) {
       if (isMetaMaskInstalled) {
         enableWeb3();
       } else {
         enableWeb3({ provider: "walletconnect" });
       }
     }
-  }, [isWeb3Enabled]);
-
-  useEffect(() => {
-    console.log(isAuthenticated);
-    console.log(user);
-  }, [isAuthenticated]);
+  }, [isWeb3Enabled, isAuthenticated]);
 
   return (
     <>
