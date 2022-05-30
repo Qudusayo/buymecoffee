@@ -10,22 +10,28 @@ import {
 import styles from "./style.module.scss";
 import ContractJSON from "./../../artifacts/contracts/BuyMeCoffee.sol/BuyMeCoffee.json";
 import QuickClick from "../../Component/QuickClick/QuickClick";
+import Spinner from "../../Component/Spinner/Spinner";
 
 function Contribution({ chain }) {
+  //Constants
+  const [sliceGap, setSliceGap] = useState(5);
   const [fullName, setFullName] = useState("Qudusayo");
   const [creating, setCreating] = useState("Coding some stuffs");
-  const [note, setNote] = useState("");
-  const [supporters, setSupporters] = useState(0);
-  const [support, setSupport] = useState([]);
-  const [totalSupport, setTotalSupport] = useState([]);
-  const [sliceGap, setSliceGap] = useState(5);
-  const [amount, setAmount] = useState(1);
-  const [inputValue, setInputValue] = useState("");
   const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   const supportedChain = process.env.REACT_APP_SUPPORTED_CHAIN_ID;
+
+  const [note, setNote] = useState("");
+  const [amount, setAmount] = useState(1);
+  const [support, setSupport] = useState([]);
+  const [supporters, setSupporters] = useState(0);
+  const [inputValue, setInputValue] = useState("");
+  const [isDonating, setIsDonating] = useState(false);
+  const [totalSupport, setTotalSupport] = useState([]);
+
   const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
   const { fetch } = useWeb3ExecuteFunction();
   const dispatch = useNotification();
+
   const Query = useMoralisQuery("BuyMeCoffee", (query) => query, [], {
     autoFetch: true,
     live: true,
@@ -71,6 +77,8 @@ function Contribution({ chain }) {
   };
 
   const setAmountHandler = (value) => {
+    if (isDonating) return;
+
     setAmount(value);
     setInputValue(value);
   };
@@ -80,6 +88,8 @@ function Contribution({ chain }) {
   };
 
   const donate = () => {
+    setIsDonating(true);
+
     let params = {
       _note: note,
     };
@@ -99,16 +109,16 @@ function Contribution({ chain }) {
       params: options,
       onSuccess: (tx) => {
         // console.log(tx);
-        setNote("");
-        setAmount(1);
         return tx.wait().then((newTx) => {
+          clearInput();
           handleNewNotification("success");
           // console.log(newTx);
         });
       },
       onError: (error) => {
+        setIsDonating(false);
         handleNewNotification("error");
-        // console.log(error);
+        console.log(error);
       },
     });
   };
@@ -119,6 +129,13 @@ function Contribution({ chain }) {
       "..." +
       address.slice(address.length - 4, address.length)
     );
+  };
+
+  const clearInput = () => {
+    setNote("");
+    setInputValue("");
+    setAmount(1);
+    setIsDonating(false);
   };
 
   const seeMore = () => {
@@ -211,24 +228,26 @@ function Contribution({ chain }) {
               onChange={onChangeHandler}
               placeholder="1"
               value={inputValue}
+              disabled={isDonating}
             />
           </div>
-          <TextArea
-            label="Message  (Required)"
-            name="Test TextArea Default"
+          <textarea
+            placeholder="Say something nice.. (Required For Now)"
             onChange={setNoteHandler}
             value={note}
-            placeholder="Say something nice.."
-            width="100%"
-          />
+            disabled={isDonating}
+          ></textarea>
           <button
             type="button"
             disabled={
-              amount < 1 || !isAuthenticated || chain !== supportedChain
+              amount < 1 ||
+              !isAuthenticated ||
+              chain !== supportedChain ||
+              isDonating
             }
             onClick={donate}
           >
-            Support {amount} $MATIC
+            {isDonating ? <Spinner /> : `Support ${amount} $MATIC`}
           </button>
         </div>
       </div>

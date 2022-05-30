@@ -163,7 +163,7 @@
         .material {
           font-size: 3em;
         }
-        
+
         input {
           width: 35px;
           height: 35px;
@@ -191,8 +191,19 @@
       }
 
       textarea {
-        font-size: 1em !important;
-        height: 90px !important;
+        width: 100%;
+        display: block;
+        font-size: 1em;
+        height: 90px;
+        padding: 4%;
+        outline: none;
+        border-radius: 7px;
+        border: 1px solid #dedede;
+        box-sizing: border-box;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
       }
 
       button {
