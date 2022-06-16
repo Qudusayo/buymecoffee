@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useChain, useMoralis } from "react-moralis";
 import { Routes, Route } from "react-router-dom";
 
 import Error404 from "./Pages/Error404/Index";
@@ -8,10 +7,11 @@ import useMetamask from "./Hooks/useMetamask.js";
 import Navbar from "./Component/Navbar/Index";
 import Contribution from "./Pages/Contribution/Index";
 import Footer from "./Component/Footer/Footer";
+import { useCustomMoralisContext } from "./context/moraliContext";
 
 function App() {
-  const { enableWeb3, isWeb3Enabled, isAuthenticated, user } = useMoralis();
-  const { chainId } = useChain();
+  const { enableWeb3, isWeb3Enabled, isAuthenticated, chainId } =
+    useCustomMoralisContext();
   const isMetaMaskInstalled = useMetamask();
 
   useEffect(() => {
@@ -22,7 +22,8 @@ function App() {
         enableWeb3({ provider: "walletconnect" });
       }
     }
-  }, [isWeb3Enabled, isAuthenticated]);
+    console.log("ChainID: " + chainId);
+  }, [isWeb3Enabled, isAuthenticated, chainId]);
 
   return (
     <>

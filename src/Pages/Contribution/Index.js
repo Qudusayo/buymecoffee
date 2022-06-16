@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Blockie, Button, TextArea, useNotification } from "web3uikit";
 import { RiCupFill } from "react-icons/ri";
-import {
-  useMoralis,
-  useMoralisQuery,
-  useMoralisSubscription,
-  useWeb3ExecuteFunction,
-} from "react-moralis";
+import { useCustomMoralisContext } from "./../../context/moraliContext";
 import styles from "./style.module.scss";
 import ContractJSON from "./../../artifacts/contracts/BuyMeCoffee.sol/BuyMeCoffee.json";
 import QuickClick from "../../Component/QuickClick/QuickClick";
@@ -17,8 +12,6 @@ function Contribution({ chain }) {
   const [sliceGap, setSliceGap] = useState(5);
   const [fullName, setFullName] = useState("Qudusayo");
   const [creating, setCreating] = useState("Coding some stuffs");
-  const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
-  const supportedChain = process.env.REACT_APP_SUPPORTED_CHAIN_ID;
 
   const [note, setNote] = useState("");
   const [amount, setAmount] = useState(1);
@@ -28,14 +21,18 @@ function Contribution({ chain }) {
   const [isDonating, setIsDonating] = useState(false);
   const [totalSupport, setTotalSupport] = useState([]);
 
-  const { isAuthenticated, Moralis, isWeb3Enabled } = useMoralis();
-  const { fetch } = useWeb3ExecuteFunction();
-  const dispatch = useNotification();
+  const {
+    isAuthenticated,
+    Moralis,
+    isWeb3Enabled,
+    runContractFunction,
+    Query,
+    dispatch,
+    contractAddress,
+    supportedChain,
+    useMoralisSubscription
+  } = useCustomMoralisContext();
 
-  const Query = useMoralisQuery("BuyMeCoffee", (query) => query, [], {
-    autoFetch: true,
-    live: true,
-  });
   useMoralisSubscription("BuyMeCoffee", (q) => q, [], {
     onUpdate: () => Query.fetch(),
     enabled: true,
@@ -105,14 +102,14 @@ function Contribution({ chain }) {
     };
     // console.log(options);
 
-    fetch({
+    runContractFunction({
       params: options,
       onSuccess: (tx) => {
-        // console.log(tx);
+        console.log(tx);
         return tx.wait().then((newTx) => {
           clearInput();
           handleNewNotification("success");
-          // console.log(newTx);
+          console.log(newTx);
         });
       },
       onError: (error) => {

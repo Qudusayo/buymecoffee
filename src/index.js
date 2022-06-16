@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
 import { BrowserRouter } from "react-router-dom";
 import { NotificationProvider } from "web3uikit";
+import { CustomMoralisProvider } from "./context/moraliContext";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +17,9 @@ root.render(
     >
       <BrowserRouter>
         <NotificationProvider>
-          <App />
+          <CustomMoralisProvider>
+            <App />
+          </CustomMoralisProvider>
         </NotificationProvider>
       </BrowserRouter>
     </MoralisProvider>
