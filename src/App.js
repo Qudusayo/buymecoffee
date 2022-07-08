@@ -29,10 +29,7 @@ function App() {
     <>
       <ChainBanner chain={chainId} />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Contribution chain={chainId} />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+      <Contribution chain={chainId} />
       <Footer />
     </>
   );

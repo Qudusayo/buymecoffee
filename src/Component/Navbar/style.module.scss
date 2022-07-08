@@ -1,3 +1,23 @@
+@mixin flexMixin($color, $bg, $hvBg, $activeBg) {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  background-color: $bg;
+  color: $color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hvBg;
+  }
+
+  &:active {
+    background-color: $activeBg;
+  }
+}
+
 .Navbar {
   display: flex;
   align-items: center;
@@ -20,6 +40,44 @@
 
   @media screen and (max-width: 768px) {
     position: relative;
-    padding: 0.75em .3em;
+    padding: 0.75em 0.3em;
+  }
+}
+
+.udLogin {
+  padding: 0.5em 3em;
+
+  @include flexMixin(#ffffff, #0d67fe, #0546b7, #478bfe);
+
+  span {
+    margin-left: 0.5em;
+  }
+}
+
+.udLogout {
+  display: flex;
+  align-items: center;
+  background-color: #478bfe;
+  width: fit-content;
+  padding: 0.2em 0.2em 0.2em 0.8em;
+  color: #ffffff;
+  border-radius: 7px;
+
+  &Balance {
+    margin-right: 0.5em;
+    font-size: 0.9em;
+  }
+
+  button {
+    padding: 0.5em;
+    @include flexMixin(#478bfe, #ffffff, #efefef, #ffffff);
+
+    span {
+      margin-right: 0.5em;
+    }
+
+    img {
+      border-radius: 50%;
+    }
   }
 }
