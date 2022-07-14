@@ -30,3 +30,4 @@ yarn-error.log*
 cache
 src/artifacts/build-info
 src/artifacts/hardhat
+.onboardbase.yaml

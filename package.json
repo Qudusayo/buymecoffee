@@ -22,9 +22,9 @@
     "web3uikit": "^0.1.153"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "onboardbase run -c 'react-scripts start'",
+    "build": "onboardbase run -c 'react-scripts build'",
+    "test": "onboardbase run -c 'react-scripts test'",
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
