@@ -21,6 +21,7 @@ function App() {
       } else {
         enableWeb3({ provider: "walletconnect" });
       }
+      console.log(process.env.REACT_APP_CONTRACT_ADDRESS)
     }
     console.log("ChainID: " + chainId);
   }, [isWeb3Enabled, isAuthenticated, chainId]);
